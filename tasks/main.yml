@@ -1,0 +1,39 @@
+---
+- name: Download Prometheus exporter from Github
+  get_url:
+    url: https://github.com/prometheus/node_exporter/releases/download/v{{ prometheus.config.version }}/node_exporter-{{ prometheus.config.version }}.linux-amd64.tar.gz
+    dest: /tmp/node_exporter-{{ prometheus.config.version }}.linux-amd64.tar.gz
+
+- name: Extract Prometheus exporter tar.gz file
+  unarchive:
+    src: /tmp/node_exporter-{{ prometheus.config.version }}.linux-amd64.tar.gz
+    dest: /tmp/
+    remote_src: yes
+
+- name: Add Prometheus User
+  user:
+    name: prometheus
+    state: present
+    create_home: no
+    system: yes
+    password: "*"
+    shell: /usr/sbin/nologin
+
+- name: Copy binary
+  copy:
+    src: "/tmp/node_exporter-{{ prometheus.config.version }}.linux-amd64/node_exporter"
+    dest: /usr/bin/node_exporter
+    owner: prometheus
+    mode: '0744'
+    remote_src: yes
+
+- name: Create Prometheus node exporter systemd drop-in
+  template:
+    src: node_exporter.j2
+    dest: "/etc/default/node_exporter"
+
+- name: Generate Prometheus node exporter systemd unit
+  copy:
+    src: node_exporter.service
+    dest: "/etc/systemd/system/node_exporter.service"
+  notify: Restart node_exporter
