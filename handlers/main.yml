@@ -4,4 +4,4 @@
     name: node_exporter.service
     state: restarted
     daemon_reload: yes
-    enabled: true
+    enabled: yes
