@@ -2,9 +2,9 @@
 # Due to shell scaping, to pass backslashes for regexes, you need to double
 # them (\\d for \d). If running under systemd, you need to double them again
 # (\\\\d to mean \d), and escape newlines too.
-ARGS="--web.listen-address={{ prometheus.config.listen }}:{{ prometheus.config.port }} \
-			 --web.telemetry-path={{ prometheus.config.path }} \
-			 --web.max-requests={{ prometheus.config.max_requests }} \
+ARGS="--web.listen-address={{ prometheus.config.node.listen }}:{{ prometheus.config.node.port }} \
+			 --web.telemetry-path={{ prometheus.config.node.path }} \
+			 --web.max-requests={{ prometheus.config.node.max_requests }} \
 "
 
 # Prometheus-node-exporter supports the following options:

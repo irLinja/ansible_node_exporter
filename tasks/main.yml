@@ -1,12 +1,12 @@
 ---
 - name: Download Prometheus exporter from Github
   get_url:
-    url: https://github.com/prometheus/node_exporter/releases/download/v{{ prometheus.config.version }}/node_exporter-{{ prometheus.config.version }}.linux-amd64.tar.gz
-    dest: /tmp/node_exporter-{{ prometheus.config.version }}.linux-amd64.tar.gz
+    url: https://github.com/prometheus/node_exporter/releases/download/v{{ prometheus.config.node.version }}/node_exporter-{{ prometheus.config.node.version }}.linux-amd64.tar.gz
+    dest: /tmp/node_exporter-{{ prometheus.config.node.version }}.linux-amd64.tar.gz
 
 - name: Extract Prometheus exporter tar.gz file
   unarchive:
-    src: /tmp/node_exporter-{{ prometheus.config.version }}.linux-amd64.tar.gz
+    src: /tmp/node_exporter-{{ prometheus.config.node.version }}.linux-amd64.tar.gz
     dest: /tmp/
     remote_src: yes
 
@@ -21,7 +21,7 @@
 
 - name: Copy binary
   copy:
-    src: "/tmp/node_exporter-{{ prometheus.config.version }}.linux-amd64/node_exporter"
+    src: "/tmp/node_exporter-{{ prometheus.config.node.version }}.linux-amd64/node_exporter"
     dest: /usr/bin/node_exporter
     owner: prometheus
     mode: '0744'

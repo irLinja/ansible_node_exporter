@@ -1,8 +1,9 @@
 ---
 prometheus:
   config:
-    version: 0.18.1
-    listen: "{{ ansible_all_ipv4_addresses | ipaddr('private') | first }}"
-    port: 9100
-    path: /metrics
-    max_requests: 0
+    node:
+      version: 0.18.1
+      listen: "{{ ansible_all_ipv4_addresses | ipaddr('private') | first }}"
+      port: 9100
+      path: /metrics
+      max_requests: 0

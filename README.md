@@ -6,21 +6,21 @@ this role will install prometheus node_exporter as a service on your servers sup
 Requirements
 ------------
 
--
+--
 
 Role Variables
 --------------
 
-prometheus.config.version: 0.18.1
-prometheus.config.listen: will automaticaly set to fist private network ip address
-prometheus.config.port: 9100
-prometheus.config.path: /metrics
-prometheus.config.max_requests: 0
+- prometheus.config.node.version: 0.18.1
+- prometheus.config.node.listen: will automaticaly set to fist private network ip address
+- prometheus.config.node.port: 9100
+- prometheus.config.node.path: /metrics
+- prometheus.config.node.max_requests: 0
 
 Dependencies
 ------------
 
--
+--
 
 Example Playbook
 ----------------
