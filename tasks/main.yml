@@ -26,6 +26,7 @@
     owner: prometheus
     mode: '0744'
     remote_src: yes
+  notify: Restart node_exporter
 
 - name: Create Prometheus node exporter systemd drop-in
   template:
